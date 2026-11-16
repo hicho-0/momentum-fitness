@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101a18">
+<meta name="description" content="Your personal 24-week strength, running and fat-loss training companion.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Momentum — Fitness Journey</title>
+<style>
+:root{--bg:#0b1211;--panel:#131e1b;--panel2:#1a2823;--line:#293a33;--text:#edf5ef;--muted:#9aada2;--lime:#c4f06a;--mint:#6ee7b7;--orange:#ffb86b;--red:#ff827c;--radius:19px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 100% -10%,#20352b 0%,transparent 60%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.app{max-width:980px;margin:auto;padding:env(safe-area-inset-top) 16px calc(28px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 2px 16px;gap:12px}.brand{font-weight:900;letter-spacing:.12em;font-size:13px;color:var(--lime)}.brand span{color:var(--text);letter-spacing:0;font-size:20px;margin-left:8px}.top-actions{display:flex;gap:8px}
+.btn,.tab,.smallbtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:10px 13px}.btn.primary{background:var(--lime);color:#152016;border-color:var(--lime);font-weight:800}.btn.ghost{background:transparent}.btn:active,.tab:active{transform:scale(.98)}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.05;margin:8px 0 10px;letter-spacing:-.04em}.sub{color:var(--muted);margin:0 0 22px}
+.hero{background:linear-gradient(135deg,#1b3026,#18221f 70%);border:1px solid #34503e;border-radius:24px;padding:22px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #4b684a;border-radius:50%;right:-55px;top:-55px;box-shadow:0 0 0 24px #ffffff05,0 0 0 48px #ffffff04}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;align-items:end;position:relative;z-index:1}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--lime);font-weight:800;text-transform:uppercase}.hero h2{font-size:25px;line-height:1.15;margin:7px 0}.hero p{color:#b6c9bd;margin:0}.stat{text-align:right}.stat strong{display:block;font-size:34px;letter-spacing:-.04em}.stat span{font-size:12px;color:var(--muted)}
+.progress{height:8px;background:#34443b;border-radius:99px;overflow:hidden;margin-top:17px}.progress i{display:block;height:100%;background:var(--lime);width:0;border-radius:99px;transition:width .3s}
+.tabs{display:flex;gap:7px;overflow:auto;margin:20px 0 16px;padding-bottom:3px}.tab{white-space:nowrap;color:var(--muted);padding:9px 13px}.tab.active{background:var(--lime);color:#172019;border-color:var(--lime);font-weight:800}
+.section{display:none}.section.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px}.card h3{font-size:16px;margin:0 0 7px}.muted{color:var(--muted)}.big{font-size:27px;font-weight:850;letter-spacing:-.04em}.kpi-label{font-size:12px;color:var(--muted)}
+.today{display:flex;justify-content:space-between;align-items:center;gap:12px}.pill{display:inline-flex;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:800;background:#283a2e;color:var(--lime)}.pill.easy{color:var(--mint);background:#18372e}.pill.rest{color:#c1cbd0;background:#293238}.pill.hard{color:var(--orange);background:#3b2d20}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:13px}.day{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 4px;text-align:center;min-height:76px;color:var(--muted);font-size:11px}.day b{display:block;color:var(--text);font-size:13px;margin-bottom:6px}.day.today{border-color:var(--lime);background:#1c2c21}.day.done{background:#20372a;border-color:#486d48}
+.workout-list{display:grid;gap:9px;margin-top:12px}.exercise{display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--panel2);border-radius:13px}.exercise input{accent-color:var(--lime);width:19px;height:19px;margin-top:2px}.exercise strong{display:block}.exercise small{color:var(--muted)}
+.day-card{margin-top:14px}.day-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.day-head h3{margin:0}.note{font-size:13px;color:var(--muted);background:#17231e;padding:12px;border-radius:12px;margin-top:12px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field label{display:block;color:var(--muted);font-size:12px;margin:0 0 5px}.field input,.field select{width:100%;background:#0e1714;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}.field input:focus{border-color:var(--lime)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line)}.table th{color:var(--muted);font-weight:600}
+.chart{width:100%;height:180px;display:block;background:#0f1815;border-radius:12px;margin-top:10px}.empty{padding:20px;text-align:center;color:var(--muted)}
+.footer{font-size:11px;color:#788b80;text-align:center;padding:25px 10px}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:10}.modal.show{display:flex}.sheet{background:var(--panel);border:1px solid var(--line);border-radius:22px 22px 16px 16px;padding:20px;width:min(100%,620px);max-height:90vh;overflow:auto}.sheet h2{margin:0 0 15px}
+@media(min-width:700px){.app{padding-left:28px;padding-right:28px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.modal{align-items:center}.sheet{border-radius:22px}}
+@media(max-width:430px){.hero-grid{grid-template-columns:1fr .7fr}.stat strong{font-size:28px}.week{gap:4px}.day{padding:8px 1px;font-size:10px}.formgrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">M <span>Momentum</span></div><div class="top-actions"><button class="btn ghost" id="installBtn" hidden>Install</button><button class="btn ghost" id="settingsBtn" aria-label="Settings">⚙</button></div></header>
+<main>
+<div class="eyebrow">Your 24-week training journey</div>
+<h1>Build the engine.<br>Keep the promise.</h1>
+<p class="sub">Strength, endurance and steady fat loss — one consistent week at a time.</p>
+<section class="hero">
+ <div class="hero-grid"><div><div class="eyebrow" id="phase">PHASE 1 · FOUNDATION</div><h2 id="heroTitle">Start where you are. Get stronger every week.</h2><p id="heroText">Small wins compound. Train with purpose, recover properly.</p></div><div class="stat"><strong id="weekNum">Week 1/24</strong><span>journey progress</span></div></div>
+ <div class="progress"><i id="journeyBar"></i></div>
+</section>
+<nav class="tabs" aria-label="Main navigation">
+<button class="tab active" data-tab="home">Today</button><button class="tab" data-tab="plan">Training plan</button><button class="tab" data-tab="log">Progress log</button><button class="tab" data-tab="guide">Guides</button>
+</nav>
+<section class="section active" id="home">
+<div class="grid">
+ <div class="card"><div class="kpi-label">CURRENT WEIGHT</div><div class="big" id="weightKpi">—</div><div class="kpi-label">Latest entry</div></div>
+ <div class="card"><div class="kpi-label">SESSIONS COMPLETED</div><div class="big" id="sessionsKpi">0</div><div class="kpi-label">This journey</div></div>
+ <div class="card"><div class="kpi-label">CURRENT STREAK</div><div class="big" id="streakKpi">0 days</div><div class="kpi-label">Training or recovery logged</div></div>
+ <div class="card"><div class="kpi-label">PULL-UPS</div><div class="big" id="pullKpi">—</div><div class="kpi-label">Best recorded set</div></div>
+</div>
+<div class="card day-card">
+ <div class="today"><div><div class="eyebrow">TODAY'S SESSION</div><h3 id="todayName">Loading…</h3><div class="muted" id="todayMeta"></div></div><span class="pill" id="todayType">TODAY</span></div>
+ <div id="todayExercises" class="workout-list"></div>
+ <div class="actions"><button class="btn primary" id="completeBtn">Mark session complete</button><button class="btn" id="openPlanBtn">Full details</button></div>
+ <div class="note" id="todayNote"></div>
+</div>
+<div class="card" style="margin-top:12px"><div class="day-head"><h3>This week</h3><span class="muted" id="weekLabel"></span></div><div class="week" id="weekStrip"></div></div>
+</section>
+<section class="section" id="plan">
+<div class="card"><div class="day-head"><div><div class="eyebrow">WEEKLY RHYTHM</div><h3>Train often. Recover intelligently.</h3></div><span class="pill">Friday = long run</span></div><div class="muted" style="margin-top:7px">A repeatable week that builds strength and running capacity without making every day a maximal-effort day.</div></div>
+<div id="planDays"></div>
+<div class="card" style="margin-top:12px"><h3>24-week progression</h3><p class="muted">The plan builds gradually, with easier recovery weeks. Run durations are guides: stay conversational on easy/long runs and shorten them if recovery or joints are struggling.</p><div id="phases"></div></div>
+</section>
+<section class="section" id="log">
+<div class="card"><div class="eyebrow">BODY & PERFORMANCE</div><h3>Log your progress</h3><p class="muted">Use morning weigh-ins under similar conditions. Judge the trend, not one day's number.</p>
+<div class="formgrid">
+<div class="field"><label for="date">Date</label><input type="date" id="date"></div>
+<div class="field"><label for="weight">Weight (kg)</label><input type="number" id="weight" min="30" max="300" step=".1" placeholder="e.g. 92.4"></div>
+<div class="field"><label for="waist">Waist (cm)</label><input type="number" id="waist" min="30" max="250" step=".5" placeholder="Optional"></div>
+<div class="field"><label for="pullups">Best pull-ups in one set</label><input type="number" id="pullups" min="0" max="100" step="1" placeholder="e.g. 4"></div>
+<div class="field"><label for="run">Longest run (km)</label><input type="number" id="run" min="0" max="200" step=".1" placeholder="Optional"></div>
+<div class="field"><label for="energy">Energy (1–5)</label><select id="energy"><option value="">Choose</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+</div><div class="actions"><button class="btn primary" id="saveLog">Save entry</button><button class="btn" id="clearLogFields">Clear</button></div></div>
+<div class="card" style="margin-top:12px"><h3>Weight trend</h3><canvas class="chart" id="weightChart" width="700" height="180"></canvas><div class="muted" id="chartCaption">Add weigh-ins to see your trend.</div></div>
+<div class="card" style="margin-top:12px"><div class="day-head"><h3>Recent entries</h3><button class="smallbtn" id="exportBtn">Export CSV</button></div><div id="entries"></div></div>
+</section>
+<section class="section" id="guide">
+<div class="card"><div class="eyebrow">THE METHOD</div><h3>Fat loss without losing your strength</h3><p class="muted">Your previous 67 kg result shows you have experience with consistent training. Treat it as a meaningful past milestone, not a deadline. Your current starting point and health matter more than repeating the old pace.</p>
+<ul class="muted"><li>Aim for a modest calorie deficit; avoid crash diets.</li><li>Include protein at every meal and plenty of vegetables, fruit and fibre.</li><li>Keep carbohydrates around training: rice, potatoes, oats, bread or fruit are useful fuel.</li><li>Sleep 7–9 hours where possible. Take recovery days seriously.</li><li>Track weekly average weight and waist; a sensible rate is often around 0.25–0.75 kg/week, but individual results vary.</li></ul></div>
+<div class="card" style="margin-top:12px"><h3>Training rules</h3><ul class="muted"><li>Warm up 5–10 minutes before strength, intervals or running.</li><li>Most strength sets should finish with 1–3 good reps still possible. Start kettlebell movements light and master technique before increasing load.</li><li>Increase only one thing at a time: reps, sets, kettlebell load or distance. Choose a bell you can control for every rep.</li><li>Do not add extra hard burpee/jump-rope/kettlebell sessions on top of the plan. Kettlebell swings are optional technique-dependent work, not a conditioning test.</li><li>Stop for sharp pain, chest pain, faintness or unusual breathlessness; seek medical advice when appropriate.</li></ul></div>
+<div class="card" style="margin-top:12px"><h3>Equipment checklist</h3><p class="muted">Pull-up bar · resistance bands · one suitable kettlebell · jump rope · running shoes · stationary bike · water · safe floor space.</p></div>
+</section>
+</main>
+<div class="footer">Your data stays on this device. Export a backup regularly. Momentum is a training aid, not medical advice.</div>
+</div>
+<div class="modal" id="settingsModal"><div class="sheet"><div class="day-head"><h2>Journey settings</h2><button class="btn" id="closeSettings">✕</button></div>
+<div class="formgrid"><div class="field"><label for="startDate">Journey start date</label><input type="date" id="startDate"></div><div class="field"><label for="goalWeight">Goal weight (kg, optional)</label><input type="number" id="goalWeight" min="30" max="300" step=".1" placeholder="Set your own goal"></div><div class="field"><label for="startWeight">Starting weight (kg)</label><input type="number" id="startWeight" min="30" max="300" step=".1" placeholder="Optional"></div><div class="field"><label for="units">Distance units</label><select id="units"><option value="km">Kilometres</option><option value="mi">Miles</option></select></div></div>
+<div class="actions"><button class="btn primary" id="saveSettings">Save settings</button><button class="btn" id="backupBtn">Download backup</button><button class="btn" id="restoreBtn">Restore backup</button><input type="file" id="restoreFile" accept="application/json" hidden></div>
+<p class="muted">Changing the start date recalculates the current week. Existing logs are kept.</p></div></div>
+<script>
+const $=id=>document.getElementById(id);
+const todayISO=()=>new Date().toISOString().slice(0,10);
+const DAY=86400000;
+const defaultData={settings:{startDate:todayISO(),goalWeight:"",startWeight:"",units:"km"},logs:[],completed:{},bestPullups:0};
+let data=load();
+function load(){try{return {...defaultData,...JSON.parse(localStorage.getItem('momentumData')||'{}')}}catch(e){return structuredClone(defaultData)}}
+function save(){localStorage.setItem('momentumData',JSON.stringify(data));render()}
+function dateAtNoon(s){return new Date(s+'T12:00:00')}
+function diffDays(a,b){return Math.floor((dateAtNoon(a)-dateAtNoon(b))/DAY)}
+function currentWeek(){return Math.max(1,Math.min(24,Math.floor(diffDays(todayISO(),data.settings.startDate)/7)+1))}
+function dayIndex(){return (dateAtNoon(todayISO()).getDay()+6)%7}
+const schedule=[
+{name:'Strength A · Pull + push',type:'Strength',tag:'hard',duration:'35–45 min',items:[['Pull-ups or band-assisted pull-ups','4 × 1–4 reps · controlled, stop before form breaks'],['Push-ups','3 × 8–15'],['Kettlebell goblet squats','3 × 8–12 · hold the bell close to your chest'],['Resistance-band or kettlebell rows','3 × 10–12'],['Kettlebell floor press (or push-ups)','3 × 8–12'],['Front plank','3 × 30–45 sec']],note:'Keep 1–3 reps in reserve. Use a band or controlled negatives if you cannot complete clean reps.'},
+{name:'Easy run',type:'Easy cardio',tag:'easy',duration:'30–45 min',items:[['Conversational run','30–45 min · easy pace'],['Mobility','5–8 min · calves, hips, ankles']],note:'You should be able to speak in full sentences. Run/walk is fine. This is not a race.'},
+{name:'Strength B · Legs + core',type:'Strength',tag:'hard',duration:'35–45 min',items:[['Kettlebell Romanian deadlift','3 × 8–12 · hinge at the hips, keep your back neutral'],['Reverse lunges (bodyweight or goblet hold)','3 × 8 each leg'],['Kettlebell one-arm overhead press or band press','3 × 8–10 each side'],['Assisted pull-ups','3 × 3–6'],['Kettlebell deadlift or glute bridge','2–3 × 10–12'],['Dead bug','3 × 8–10 each side']],note:'Move slowly and with control. If legs are still heavy from running, reduce one set.'},
+{name:'Bike + rope technique',type:'Conditioning',tag:'easy',duration:'25–35 min',items:[['Stationary bike','20–25 min easy/moderate'],['Jump rope practice (optional)','4–6 × 30 sec relaxed, 60 sec rest'],['Optional kettlebell swings','Only if you already know the hip hinge: 3 × 10 light, crisp reps; otherwise skip'],['Mobility','5 min']],note:'Keep this deliberately controlled so Friday’s long run stays the priority. Skip rope if calves or Achilles feel sore.'},
+{name:'Friday long run',type:'Long run',tag:'hard',duration:'See progression',items:[['Long easy run','Use the weekly distance/time guide below; conversational effort'],['Cool down walk','5–10 min'],['Gentle mobility','5 min']],note:'Friday is your long-run day. Do not chase pace. If pain changes your stride, stop. If you are not recovered, shorten to an easy run/walk.'},
+{name:'Strength C · Full body + core',type:'Strength',tag:'hard',duration:'30–40 min',items:[['Kettlebell reverse lunge or split squat','3 × 8 each leg'],['Incline or standard push-ups','3 × 8–12'],['Kettlebell one-arm row','3 × 10 each side'],['Kettlebell suitcase carry','3 × 30–45 sec each side'],['Bird dog','3 × 8 each side'],['Burpees (optional)','2 × 4–6 step-back reps, only if fresh']],note:'Saturday is not another max-effort conditioning day. Drop burpees if you feel fatigued after Friday.'},
+{name:'Recovery day',type:'Recovery',tag:'rest',duration:'Rest / 20–30 min walk',items:[['Easy walk (optional)','20–30 min'],['Gentle mobility (optional)','5–10 min'],['Recovery check','Sleep, hydration, soreness and energy']],note:'Recovery is part of the programme. No hard workout, intervals or long jump-rope session today.'}
+];
+const longRun=[ '6–7 km','7–8 km','8 km','6 km (recovery)','8–9 km','9–10 km','10 km','7–8 km (recovery)','10–11 km','11–12 km','12 km','8–9 km (recovery)','12–13 km','13 km','14 km','9–10 km (recovery)','14–15 km','15 km','16 km','10–11 km (recovery)','16 km','17 km','18 km','easy 6–8 km'];
+function phase(w){if(w<=4)return ['PHASE 1 · FOUNDATION','Build the habit and clean movement','Easy consistency first.'];if(w<=8)return ['PHASE 2 · BUILD','Build strength and aerobic capacity','Gradually add a little volume.'];if(w<=12)return ['PHASE 3 · CONSOLIDATE','Get comfortable with the routine','Keep quality high and recover well.'];if(w<=16)return ['PHASE 4 · PROGRESS','Strength and endurance development','Progress only when recovery is good.'];if(w<=20)return ['PHASE 5 · STRONGER','Build durable fitness','Stay patient; no forced pace targets.'];return ['PHASE 6 · REVIEW','Finish strong and assess','Reduce load and review your next block.']}
+function render(){let w=currentWeek(),d=dayIndex(),p=phase(w);$('phase').textContent=p[0];$('heroTitle').textContent=p[1];$('heroText').textContent=p[2];$('weekNum').textContent=`Week ${w}/24`;$('journeyBar').style.width=(w/24*100)+'%';$('weightKpi').textContent=data.logs.length?`${data.logs[data.logs.length-1].weight||'—'} kg`:'—';$('sessionsKpi').textContent=Object.values(data.completed).filter(Boolean).length;$('streakKpi').textContent=streak()+' days';$('pullKpi').textContent=data.bestPullups||'—';
+let s=schedule[d];$('todayName').textContent=s.name;$('todayMeta').textContent=`${s.type} · ${s.duration}`;$('todayType').textContent=s.type.toUpperCase();$('todayType').className='pill '+s.tag;$('todayExercises').innerHTML=s.items.slice(0,4).map(x=>`<div class="exercise"><span>•</span><div><strong>${esc(x[0])}</strong><small>${esc(x[1])}</small></div></div>`).join('');$('todayNote').textContent=s.note;$('completeBtn').textContent=data.completed[todayISO()]?'Completed ✓':'Mark session complete';$('completeBtn').classList.toggle('primary',!data.completed[todayISO()]);
+$('weekLabel').textContent=`Week ${w}`;$('weekStrip').innerHTML=schedule.map((x,i)=>{let dt=new Date(dateAtNoon(todayISO()).getTime()+(i-d)*DAY),iso=dt.toISOString().slice(0,10);return `<div class="day ${i===d?'today':''} ${data.completed[iso]?'done':''}"><b>${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}</b>${['💪','🏃','🦵','🚴','🏃‍♂️','⚡','🌿'][i]}<br>${i===4?'Long run':x.type}</div>`}).join('');
+$('planDays').innerHTML=schedule.map((x,i)=>`<div class="card day-card"><div class="day-head"><h3>${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'][i]} · ${x.name}</h3><span class="pill ${x.tag}">${x.duration}</span></div><div class="workout-list">${x.items.map(a=>`<div class="exercise"><span>•</span><div><strong>${esc(a[0])}</strong><small>${esc(a[1])}</small></div></div>`).join('')}</div>${i===4?`<div class="note"><b>Week ${w} long-run guide:</b> ${longRun[w-1]}. Use easy effort; reduce if needed.</div>`:`<div class="note">${esc(x.note)}</div>`}</div>`).join('');
+$('phases').innerHTML=[['Weeks 1–4','Foundation · Learn the routine; week 4 is easier.'],['Weeks 5–8','Build · Add reps or resistance gradually; week 8 is easier.'],['Weeks 9–12','Consolidate · Keep strength steady; progress long run only if comfortable.'],['Weeks 13–16','Progress · Small increases, no sudden jumps. Week 16 is easier.'],['Weeks 17–20','Durability · Maintain strength while building easy endurance.'],['Weeks 21–24','Review · Week 24 reduces volume; reassess weight, waist, energy and performance.']].map(a=>`<div class="exercise"><span>◷</span><div><strong>${a[0]}</strong><small>${a[1]}</small></div></div>`).join('');
+renderLogs();}
+function renderLogs(){let logs=[...data.logs].sort((a,b)=>a.date.localeCompare(b.date));$('entries').innerHTML=logs.length?`<table class="table"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Pull-ups</th></tr></thead><tbody>${logs.slice(-8).reverse().map(l=>`<tr><td>${l.date}</td><td>${l.weight?l.weight+' kg':'—'}</td><td>${l.waist?l.waist+' cm':'—'}</td><td>${l.pullups??'—'}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">No entries yet. Add your first check-in above.</div>';
+drawChart(logs);let latest=logs.filter(l=>l.weight).slice(-1)[0];$('chartCaption').textContent=latest?`Latest recorded weight: ${latest.weight} kg · ${logs.filter(l=>l.weight).length} weigh-ins`:'Add weigh-ins to see your trend.'}
+function drawChart(logs){let c=$('weightChart'),ctx=c.getContext('2d'),W=c.width,H=c.height;ctx.clearRect(0,0,W,H);ctx.strokeStyle='#2a3c33';ctx.lineWidth=1;for(let i=1;i<=3;i++){let y=i*H/4;ctx.beginPath();ctx.moveTo(25,y);ctx.lineTo(W-15,y);ctx.stroke()}let a=logs.filter(l=>Number(l.weight)>0);if(a.length<2){ctx.fillStyle='#9aada2';ctx.font='16px system-ui';ctx.fillText(a.length?'Add one more weigh-in':'Your weight trend will appear here',30,90);return}let vals=a.map(x=>Number(x.weight)),lo=Math.min(...vals)-1,hi=Math.max(...vals)+1;ctx.strokeStyle='#c4f06a';ctx.lineWidth=3;ctx.beginPath();a.forEach((v,i)=>{let x=30+i*(W-60)/(a.length-1),y=H-25-(Number(v.weight)-lo)/(hi-lo)*(H-50);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();a.forEach((v,i)=>{let x=30+i*(W-60)/(a.length-1),y=H-25-(Number(v.weight)-lo)/(hi-lo)*(H-50);ctx.fillStyle='#c4f06a';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill()})}
+function streak(){let n=0,d=new Date();for(let i=0;i<365;i++){let s=d.toISOString().slice(0,10);if(data.completed[s])n++;else if(i>0)break;d=new Date(d.getTime()-DAY)}return n}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab))}));
+$('completeBtn').onclick=()=>{data.completed[todayISO()]=!data.completed[todayISO()];save()};
+$('openPlanBtn').onclick=()=>document.querySelector('[data-tab="plan"]').click();
+$('date').value=todayISO();
+$('saveLog').onclick=()=>{let entry={date:$('date').value||todayISO(),weight:$('weight').value?Number($('weight').value):null,waist:$('waist').value?Number($('waist').value):null,pullups:$('pullups').value?Number($('pullups').value):null,run:$('run').value?Number($('run').value):null,energy:$('energy').value?Number($('energy').value):null};if(!entry.weight&&!entry.waist&&entry.pullups===null&&entry.run===null&&!entry.energy){alert('Add at least one measurement.');return}data.logs=data.logs.filter(x=>x.date!==entry.date);data.logs.push(entry);if(entry.pullups!==null)data.bestPullups=Math.max(data.bestPullups||0,entry.pullups);save();['weight','waist','pullups','run','energy'].forEach(id=>$(id).value='');$('date').value=todayISO()};
+$('clearLogFields').onclick=()=>['weight','waist','pullups','run','energy'].forEach(id=>$(id).value='');
+$('settingsBtn').onclick=()=>{$('startDate').value=data.settings.startDate;$('goalWeight').value=data.settings.goalWeight;$('startWeight').value=data.settings.startWeight;$('units').value=data.settings.units;$('settingsModal').classList.add('show')};
+$('closeSettings').onclick=()=>$('settingsModal').classList.remove('show');
+$('saveSettings').onclick=()=>{data.settings={startDate:$('startDate').value||todayISO(),goalWeight:$('goalWeight').value,startWeight:$('startWeight').value,units:$('units').value};save();$('settingsModal').classList.remove('show')};
+function download(name,content,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([content],{type}));a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
+$('exportBtn').onclick=()=>{let rows=[['date','weight_kg','waist_cm','pullups','longest_run_km','energy'],...data.logs.map(x=>[x.date,x.weight??'',x.waist??'',x.pullups??'',x.run??'',x.energy??''])];download('momentum-progress.csv',rows.map(r=>r.join(',')).join('\n'),'text/csv')};
+$('backupBtn').onclick=()=>download('momentum-backup.json',JSON.stringify(data,null,2),'application/json');
+$('restoreBtn').onclick=()=>$('restoreFile').click();
+$('restoreFile').onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());if(!obj.settings||!Array.isArray(obj.logs))throw Error();data=obj;save();alert('Backup restored.')}catch(err){alert('That backup file could not be read.')}};
+let installPrompt;$('installBtn').onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null}};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;$('installBtn').hidden=false});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();
+</script>
+</body></html>
